@@ -1,0 +1,59 @@
+# камень ножницы бумага с роботом
+import random
+import time
+
+count = 0
+hody = {
+    1 : "камень",
+    2 : "ножницы",
+    3 : "бумага",
+}
+
+def space():
+    print("\n" + "-" * 20 + "\n")
+
+def game():
+    try:
+        global count
+        robo = random.randint(1, 3)
+        print(f"Вы выбрали : {hody[player_hod]}")
+        print(f"Робот выбрал : {hody[robo]}")
+        time.sleep(0.5)
+        if player_hod == robo:
+            return "Ничья"
+        if player_hod == 1:
+            if robo == 2:
+                count += 1
+                return "Вы выиграли"
+            if robo == 3:
+                return "Вы проиграли"
+        if player_hod == 2:
+            if robo == 1:
+                return "Вы проиграли"
+            if robo == 3:
+                count += 1
+                return "Вы выиграли"
+        if player_hod == 3:
+            if robo == 1:
+                count += 1
+                return "Вы выиграли"
+            if robo == 2:
+                return "Вы проиграли"
+    except KeyError:
+        space()
+        return "Ошибка введите число в промежутке от 1 до 3"
+        space()
+
+while count < 4:
+    try:
+        player_hod = int(input(f"Камень ножницы бумага с роботом\nТекущий счет {count}\n\nВыберите ход:\n1 - камень \n2 - ножинцы \n3 - бумага\n\n"))
+        print(game())
+        time.sleep(1)
+        space()
+    except ValueError:
+        space()
+        print("Ошибка ValueError введите число")
+        space()
+
+time.sleep(1)
+print("\nИгра окончена вы выиграли")
